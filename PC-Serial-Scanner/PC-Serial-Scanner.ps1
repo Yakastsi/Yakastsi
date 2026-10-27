@@ -147,7 +147,6 @@ function Get-RamVendorName {
         '0198' = 'Kingston'
         '198'  = 'Kingston'
         '04CD' = 'G.Skill'
-        '04cd' = 'G.Skill'
         '029E' = 'Corsair'
         '2E'   = 'Corsair'
         '80AD' = 'Hynix/SK hynix'
@@ -534,9 +533,8 @@ for ($stickIdx = 1; $stickIdx -le $maxSticks; $stickIdx++) {
     if ($sn) {
         Add-UniqueRow 'ОЗУ' "Планка ОЗУ #$stickIdx (слот $slotLabel)" $mfr $model $sn $extra -Warranty $true
     } else {
-        # No serial in firmware — put Part# as warranty fallback identity
-        $note = "S/N планки НЕ прописан в SMBIOS/SPD (часто у Patriot/OEM). Для гарантии используйте Part#: $part и наклейку на модуле."
-        Add-UniqueRow 'ОЗУ' "Планка ОЗУ #$stickIdx (слот $slotLabel)" $mfr $model $(if ($part) { "PART:$part" } else { $null }) $extra $note -Warranty $true
+        $note = "S/N НЕ прописан в SMBIOS (часто Patriot/OEM). Для гарантии: Part# $part + наклейка на модуле."
+        Add-UniqueRow 'ОЗУ' "Планка ОЗУ #$stickIdx (слот $slotLabel) — Part# $part" $mfr $model $null $extra $note -Warranty $true
     }
 }
 
