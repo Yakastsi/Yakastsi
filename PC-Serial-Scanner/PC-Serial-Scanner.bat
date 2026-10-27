@@ -1,28 +1,37 @@
 @echo off
-chcp 65001 >nul
-title PC Serial Scanner — Yakastsi / rgb.by
+setlocal
+title PC Serial Scanner - Yakastsi / rgb.by
 cd /d "%~dp0"
 
 echo.
 echo  ============================================================
 echo   PC Serial Scanner
-echo   Yakastsi — rgb.by
+echo   Yakastsi - rgb.by
 echo  ============================================================
 echo.
-echo  Сбор серийных номеров комплектующих...
-echo  Не закрывайте это окно.
+echo  Collecting hardware serial numbers...
+echo  Please wait. Do not close this window.
 echo.
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0PC-Serial-Scanner.ps1"
+where powershell.exe >nul 2>&1
+if errorlevel 1 (
+  echo  ERROR: powershell.exe not found.
+  echo  This tool needs Windows PowerShell.
+  echo.
+  pause
+  exit /b 1
+)
+
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0PC-Serial-Scanner.ps1"
 set ERR=%ERRORLEVEL%
 
 echo.
-if %ERR% NEQ 0 (
-  echo  Ошибка выполнения. Код: %ERR%
-  echo  Попробуйте запустить от имени администратора.
+if not "%ERR%"=="0" (
+  echo  ERROR. Exit code: %ERR%
+  echo  Try: right-click this .bat -^> Run as administrator.
 ) else (
-  echo  Готово. Отчёты сохранены в папке Reports.
+  echo  Done. Reports saved in the Reports folder.
 )
 echo.
 pause
-exit /b %ERR%
+endlocal & exit /b %ERR%

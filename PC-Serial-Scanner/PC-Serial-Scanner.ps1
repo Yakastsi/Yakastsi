@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
   Максимальный сбор серийных номеров комплектующих ПК (Windows 10/11).

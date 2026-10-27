@@ -1,4 +1,4 @@
-PC Serial Scanner
+﻿PC Serial Scanner
 Yakastsi — rgb.by
 ========================================
 
@@ -46,9 +46,12 @@ Yakastsi — rgb.by
 
 Файлы
 -----
-PC-Serial-Scanner.bat   — запуск двойным кликом
+PC-Serial-Scanner.bat   — запуск двойным кликом (только латиница в bat)
 PC-Serial-Scanner.ps1   — основная логика (не обязательно открывать)
 Reports\                — сюда сохраняются отчёты TXT / CSV / HTML
+
+Если bat «ломается» и пишет '... is not recognized» —
+убедитесь, что скопирована свежая папка целиком с обновлённым .bat.
 
 
 Сделано: Yakastsi — rgb.by
